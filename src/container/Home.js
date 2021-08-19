@@ -34,7 +34,7 @@ const Home = () => {
 		setParameters(unique);
 	}, [dispatch, measurements]);
 
-	const fetchCities = (e) => {
+	const getCities = (e) => {
 		dispatch(PollutionAction.getCity(e.target.value));
 	};
 
@@ -42,7 +42,7 @@ const Home = () => {
 		dispatch(PollutionAction.getMeasurement(values));
 	};
 
-	const groupData = async (e) => {
+	const showBar = async (e) => {
 		let dates = [],
 			values = [];
 		const parameterName = e.target.innerText;
@@ -73,7 +73,7 @@ const Home = () => {
 	});
 
 	return (
-		<div>
+		<div style={{ marginTop: "2%" }}>
 			<Card>
 				<CardBody>
 					<Formik
@@ -84,12 +84,9 @@ const Home = () => {
 						}}>
 						{({
 							values,
-							errors,
-							touched,
 							handleChange,
 							handleBlur,
 							handleSubmit,
-							isSubmitting,
 						}) => (
 							<form onSubmit={handleSubmit}>
 								<div class='row'>
@@ -100,7 +97,7 @@ const Home = () => {
 											value={values.country}
 											onBlur={handleBlur}
 											onChange={(e) => {
-												fetchCities(e);
+												getCities(e);
 												handleChange(e);
 											}}>
 											<option selected>Country</option>
@@ -124,8 +121,8 @@ const Home = () => {
 											<option selected>City</option>
 											{cities.length > 0
 												? cities.map((d) => (
-														<option value={d.city}>{d.city}</option>
-												  ))
+													<option value={d.city}>{d.city}</option>
+												))
 												: null}
 										</select>
 										<ErrorMessage
@@ -168,13 +165,13 @@ const Home = () => {
 								<div className='row' style={{ marginTop: "15px" }}>
 									<div class='col'>
 										<button
-											className='btn btn-primary'
+											className="btn btn-outline btn-lg"
 											type='submit'
-											style={{ backgroundColor: "#232f3b" }}>
-											GO
+											style={{ backgroundColor: "#563d7c", color: "white" }}>
+											View
 											<i
 												className='fa fa-long-arrow-right'
-												style={{ paddingLeft: "10px" }}></i>
+												style={{ paddingLeft: "10px", color: "white" }}></i>
 										</button>
 									</div>
 								</div>
@@ -186,9 +183,9 @@ const Home = () => {
 			<div class='d-flex flex-row bd-highlight mb-3 mt-3'>
 				{parameters.map((p) => (
 					<button
-						class='btn btn-success btn-sm m-2'
-						style={{ backgroundColor: "#232f3b" }}
-						onClick={groupData}>
+						class='btn btn-outline-light m-2'
+						style={{ backgroundColor: "#563d7c" }}
+						onClick={showBar}>
 						{p}
 					</button>
 				))}

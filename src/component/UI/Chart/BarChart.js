@@ -14,7 +14,7 @@ const BarChart = (props) => {
 							{
 								label: "# pollution",
 								data: props.datasets,
-								backgroundColor: "#349eeb",
+								backgroundColor: "#563d7c",
 							},
 						],
 					}}

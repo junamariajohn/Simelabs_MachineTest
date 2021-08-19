@@ -1,0 +1,6 @@
+{
+	"BASE_URL": "https://docs.openaq.org",
+	"CONTROLLER_COUNTRY": "countries",
+	"CONTROLLER_CITY": "cities",
+	"CONTROLLER_MEASUREMENT": "measurements"
+}
