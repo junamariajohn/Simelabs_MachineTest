@@ -44,7 +44,6 @@ const cityWatch = function* () {
 
 const measurementSaga = function* (action) {
 	const measurementResponse = yield Service.fetchMeasurement(action.values);
-	debugger;
 	if (!measurementResponse.error) {
 		yield put({
 			type: ActionType.GET_MEASUREMENT_SUCCESS,

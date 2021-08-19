@@ -46,7 +46,6 @@ const reducer = createReducer(initialPollutionState, {
 	},
 	[ActionType.GET_MEASUREMENT_SUCCESS]: (state, data) => {
 		state.apiStatus = 1;
-		debugger;
 		state.measurement.meta = data.data.meta;
 		state.measurement.results = data.data.results;
 		state.measurement.error = {};

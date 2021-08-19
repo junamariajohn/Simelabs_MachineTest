@@ -2,6 +2,8 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import Card from "../Card/Card";
 import CardBody from "../Card/CardBody";
+import * as Moment from "moment";
+
 
 const BarChart = (props) => {
 	return (

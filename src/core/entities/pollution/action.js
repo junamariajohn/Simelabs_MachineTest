@@ -13,7 +13,6 @@ export const PollutionAction = {
 		};
 	},
 	getMeasurement(values) {
-		debugger;
 		return {
 			type: ActionType.GET_MEASUREMENT_BEGIN,
 			values,
