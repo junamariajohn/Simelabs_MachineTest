@@ -73,125 +73,134 @@ const Home = () => {
 		date_to: Yup.date().required("Choose a To date"),
 	});
 
-	const handleReset = () => {
-		formikRef.current.resetForm();
-	}
+
 	return (
-		<div style={{ marginTop: "2%" }}>
-			<Card styleClasses='card custom-card border mb-lg-0'>
-				<CardBody>
-					<Formik
-						initialValues={initialValues}
-						validationSchema={validationSchema}
-						innerRef={formikRef}
-						onSubmit={(values, { setSubmitting }) => {
-							handleSubmit(values, { setSubmitting });
-						}}>
-						{({
-							values,
-							handleChange,
-							handleBlur,
-							handleSubmit,
-							resetForm
-						}) => (
-							<form onSubmit={handleSubmit}>
-								<div class='row'>
-									<div class='col'>
-										<select
-											class='form-select'
-											name={"country"}
-											value={values.country}
-											onBlur={handleBlur}
-											onChange={(e) => {
-												getCities(e);
-												handleChange(e);
-											}}>
-											<option selected>Country</option>
-											{countries.map((d) => (
-												<option value={d.code}>{d.name}</option>
-											))}
-										</select>
-										<ErrorMessage
-											className='error-message'
-											name='country'
-											component={TextError}
-										/>
+		<div style={{ marginTop: "5%" }}>
+			<Card>
+				<div style={{
+					padding: "10px 15px 0 15px",
+					marginBottom: "0",
+					borderBottom: "1px solid #e8e8f7",
+					background: "#563d7c",
+					color: "white"
+				}} className='card-header pb-3'>
+					Fill Below Details
+				</div>
+
+				<div className='card-header pb-3'>
+					<CardBody>
+						<Formik
+							initialValues={initialValues}
+							validationSchema={validationSchema}
+							innerRef={formikRef}
+							onSubmit={(values, { setSubmitting }) => {
+								handleSubmit(values, { setSubmitting });
+							}}>
+							{({
+								values,
+								handleChange,
+								handleBlur,
+								handleSubmit,
+								resetForm
+							}) => (
+								<form onSubmit={handleSubmit}>
+									<div class='row'>
+										<div class='col'>
+											<select
+												class='form-select'
+												name={"country"}
+												value={values.country}
+												onBlur={handleBlur}
+												onChange={(e) => {
+													getCities(e);
+													handleChange(e);
+												}}>
+												<option selected>Choose Country</option>
+												{countries.map((d) => (
+													<option value={d.code}>{d.name}</option>
+												))}
+											</select>
+											<ErrorMessage
+												className='error-message'
+												name='country'
+												component={TextError}
+											/>
+										</div>
+										<div class='col'>
+											<select
+												class='form-select'
+												name={"city"}
+												value={values.city}
+												onChange={handleChange}
+												onBlur={handleBlur}>
+												<option selected>Choose City</option>
+												{cities.length > 0
+													? cities.map((d) => (
+														<option value={d.city}>{d.city}</option>
+													))
+													: null}
+											</select>
+											<ErrorMessage
+												className='error-message'
+												name='city'
+												component={TextError}
+											/>
+										</div>
 									</div>
-									<div class='col'>
-										<select
-											class='form-select'
-											name={"city"}
-											value={values.city}
-											onChange={handleChange}
-											onBlur={handleBlur}>
-											<option selected>City</option>
-											{cities.length > 0
-												? cities.map((d) => (
-													<option value={d.city}>{d.city}</option>
-												))
-												: null}
-										</select>
-										<ErrorMessage
-											className='error-message'
-											name='city'
-											component={TextError}
-										/>
+									<div className='row' style={{ marginTop: "15px" }}>
+										<div class='col'>
+											<TextInput
+												type='date'
+												name='date_from'
+												value={values.date_from}
+												onChange={handleChange}
+												onBlur={handleBlur}
+											/>
+											<ErrorMessage
+												className='error-message'
+												name='date_from'
+												component={TextError}
+											/>
+										</div>
+										<div class='col'>
+											<TextInput
+												type='date'
+												name='date_to'
+												value={values.date_to}
+												onChange={handleChange}
+												onBlur={handleBlur}
+											/>
+											<ErrorMessage
+												className='error-message'
+												name='date_to'
+												component={TextError}
+											/>
+										</div>
 									</div>
-								</div>
-								<div className='row' style={{ marginTop: "15px" }}>
-									<div class='col'>
-										<TextInput
-											type='date'
-											name='date_from'
-											value={values.date_from}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-										<ErrorMessage
-											className='error-message'
-											name='date_from'
-											component={TextError}
-										/>
+									<div className='row' style={{ marginTop: "15px" }}>
+										<div class='col'>
+											<button
+												className="btn btn-outline btn-lg"
+												type='submit'
+												style={{ backgroundColor: "#563d7c", color: "white", }}>
+												View
+											</button>
+											<button
+												className="btn btn-outline-secondary"
+												type='submit'
+												style={{ marginLeft: "2%" }}
+												onClick={() => {
+													resetForm();
+												}}>
+												Reset
+											</button>
+										</div>
 									</div>
-									<div class='col'>
-										<TextInput
-											type='date'
-											name='date_to'
-											value={values.date_to}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-										<ErrorMessage
-											className='error-message'
-											name='date_to'
-											component={TextError}
-										/>
-									</div>
-								</div>
-								<div className='row' style={{ marginTop: "15px" }}>
-									<div class='col'>
-										<button
-											className="btn btn-outline btn-lg"
-											type='submit'
-											style={{ backgroundColor: "#563d7c", color: "white", }}>
-											View
-										</button>
-										<button
-											className="btn btn-outline-secondary"
-											type='submit'
-											style={{ marginLeft: "2%" }}
-											onClick={() => {
-												resetForm();
-												handleReset();
-											}}>
-											Reset
-										</button>
-									</div>
-								</div>
-							</form>
-						)}
-					</Formik>
-				</CardBody>
+								</form>
+							)}
+						</Formik>
+					</CardBody>
+				</div>
 			</Card>
 			<div class='d-flex flex-row bd-highlight mb-3 mt-3'>
 				{parameters.map((p) => (
