@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, ErrorMessage } from "formik";
 
@@ -13,6 +13,7 @@ import * as Yup from "yup";
 
 const Home = () => {
 	const dispatch = useDispatch();
+	const formikRef = useRef();
 
 	const countries = useSelector((state) => state.pollution.country.results);
 	const cities = useSelector((state) => state.pollution.city.results);
@@ -72,13 +73,17 @@ const Home = () => {
 		date_to: Yup.date().required("Choose a To date"),
 	});
 
+	const handleReset = () => {
+		formikRef.current.resetForm();
+	}
 	return (
 		<div style={{ marginTop: "2%" }}>
-			<Card>
+			<Card styleClasses='card custom-card border mb-lg-0'>
 				<CardBody>
 					<Formik
 						initialValues={initialValues}
 						validationSchema={validationSchema}
+						innerRef={formikRef}
 						onSubmit={(values, { setSubmitting }) => {
 							handleSubmit(values, { setSubmitting });
 						}}>
@@ -87,6 +92,7 @@ const Home = () => {
 							handleChange,
 							handleBlur,
 							handleSubmit,
+							resetForm
 						}) => (
 							<form onSubmit={handleSubmit}>
 								<div class='row'>
@@ -167,11 +173,18 @@ const Home = () => {
 										<button
 											className="btn btn-outline btn-lg"
 											type='submit'
-											style={{ backgroundColor: "#563d7c", color: "white" }}>
+											style={{ backgroundColor: "#563d7c", color: "white", }}>
 											View
-											<i
-												className='fa fa-long-arrow-right'
-												style={{ paddingLeft: "10px", color: "white" }}></i>
+										</button>
+										<button
+											className="btn btn-outline-secondary"
+											type='submit'
+											style={{ marginLeft: "2%" }}
+											onClick={() => {
+												resetForm();
+												handleReset();
+											}}>
+											Reset
 										</button>
 									</div>
 								</div>

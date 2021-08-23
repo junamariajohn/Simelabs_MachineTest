@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = (props) => {
 	return (
-		<div className={`${props.className} card shadow`} onClick={props.onClick}>
+		<div className="card custom-card border mb-lg-0" onClick={props.onClick}>
 			{props.children}
 		</div>
 	);
